@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مشن مرکبات - جماعت ششم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #060b19;
+    --bg-card: rgba(15, 23, 42, 0.96);
+    --cyan: #38bdf8;
+    --gold: #facc15;
+    --orange: #fb923c;
+    --emerald: #34d399;
+    --purple: #c084fc;
+    --rose: #fb7185;
+    --text-white: #f8fafc;
+    --text-soft: #cbd5e1;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+    background: radial-gradient(circle at top, #1e293b 0%, #090e1c 60%, #03060d 100%);
+    color: var(--text-white);
+    min-height: 100vh;
+    line-height: 2.25;
+    font-size: 1.25rem;
+  }
+
+  .container {
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  header {
+    text-align: center;
+    padding: 22px 20px;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    border: 2px solid var(--cyan);
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(56, 189, 248, 0.25);
+    margin-bottom: 22px;
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.16);
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
+    padding: 2px 18px;
+    border-radius: 50px;
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    color: var(--gold);
+    text-shadow: 0 2px 14px rgba(250, 204, 21, 0.45);
+  }
+
+  .score-strip {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .score-box {
+    background: rgba(6, 11, 25, 0.92);
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
+    padding: 3px 20px;
+    border-radius: 50px;
+    font-size: 1.15rem;
+  }
+
+  .nav-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .tab-btn {
+    font-family: inherit;
+    font-size: 1.15rem;
+    background: var(--bg-card);
+    color: var(--text-white);
+    border: 1.5px solid rgba(148, 163, 184, 0.35);
+    padding: 8px 16px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: 0.25s;
+  }
+
+  .tab-btn:hover {
+    border-color: var(--cyan);
+    transform: translateY(-2px);
+  }
+
+  .tab-btn.active {
+    background: linear-gradient(135deg, #38bdf8, #2563eb);
+    color: #fff;
+    font-weight: bold;
+    border-color: #bae6fd;
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.55);
+  }
+
+  .tab-content {
+    display: none;
+  }
+
+  .tab-content.active {
+    display: block;
+    animation: fadeIn 0.35s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1.5px solid rgba(56, 189, 248, 0.35);
+    border-radius: 22px;
+    padding: 25px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    color: var(--gold);
+    border-bottom: 2px dashed rgba(250, 204, 21, 0.3);
+    padding-bottom: 8px;
+    margin-bottom: 18px;
+  }
+
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+
+  .concept-box {
+    background: rgba(6, 11, 25, 0.92);
+    border-radius: 18px;
+    padding: 20px;
+    border-top: 5px solid var(--cyan);
+  }
+
+  .concept-box.tam {
+    border-top-color: var(--emerald);
+  }
+
+  .concept-box.naqis {
+    border-top-color: var(--orange);
+  }
+
+  .example-pill {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 14px;
+    border-radius: 12px;
+    margin: 4px;
+    color: var(--gold);
+  }
+
+  .phrase-tester {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  .phrase-item {
+    background: #0b132b;
+    border: 1.5px solid #334155;
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .phrase-text {
+    font-size: 1.45rem;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .btn-mini {
+    font-family: inherit;
+    font-size: 1.05rem;
+    padding: 5px 14px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin: 0 4px;
+    font-weight: bold;
+  }
+
+  .btn-naqis { background: var(--orange); color: #0f172a; }
+  .btn-tam { background: var(--emerald); color: #0f172a; }
+
+  .types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 18px;
+  }
+
+  .type-card {
+    background: rgba(6, 11, 25, 0.94);
+    border-radius: 18px;
+    padding: 20px;
+    border-right: 6px solid var(--gold);
+  }
+
+  .type-card:nth-child(2) { border-right-color: var(--cyan); }
+  .type-card:nth-child(3) { border-right-color: var(--emerald); }
+  .type-card:nth-child(4) { border-right-color: var(--rose); }
+  .type-card:nth-child(5) { border-right-color: var(--purple); }
+
+  .type-card h3 {
+    font-size: 1.55rem;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .formula-tag {
+    background: rgba(56, 189, 248, 0.16);
+    color: var(--cyan);
+    padding: 4px 12px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    margin: 8px 0;
+    display: inline-block;
+  }
+
+  /* RADIAL HUB-AND-SPOKE MIND MAP */
+  .radial-board {
+    background: radial-gradient(circle at center, #134e4a 0%, #0f172a 75%, #060b19 100%);
+    border: 3px solid #2dd4bf;
+    border-radius: 28px;
+    padding: 30px 20px;
+    position: relative;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.65);
+  }
+
+  .radial-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .radial-header h3 {
+    font-size: 2.1rem;
+    color: #fef08a;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  }
+
+  .radial-layout {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .radial-col {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .center-hub-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+  }
+
+  .center-circle {
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fef08a, #facc15 65%, #eab308 100%);
+    border: 6px solid #0f172a;
+    box-shadow: 0 0 0 4px #facc15, 0 15px 35px rgba(0, 0, 0, 0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #0f172a;
+    padding: 15px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .center-circle span.big-title {
+    font-size: 1.95rem;
+    font-weight: bold;
+    line-height: 1.5;
+  }
+
+  .center-circle span.sub-title {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #1e293b;
+  }
+
+  .mm-bubble {
+    background: #fefce8;
+    color: #0f172a;
+    border: 4px solid #0f172a;
+    border-radius: 32px;
+    padding: 16px 20px;
+    box-shadow: 6px 6px 0px #0f172a, 0 10px 25px rgba(0, 0, 0, 0.45);
+    position: relative;
+    transition: transform 0.25s ease;
+  }
+
+  .mm-bubble:hover {
+    transform: translateY(-4px);
+  }
+
+  .mm-bubble.b-izafi { background: #fef9c3; border-color: #ca8a04; box-shadow: 6px 6px 0px #ca8a04; }
+  .mm-bubble.b-tauseefi { background: #e0f2fe; border-color: #0284c7; box-shadow: 6px 6px 0px #0284c7; }
+  .mm-bubble.b-atfi { background: #dcfce7; border-color: #16a34a; box-shadow: 6px 6px 0px #16a34a; }
+  .mm-bubble.b-mohmal { background: #ffe4e6; border-color: #e11d48; box-shadow: 6px 6px 0px #e11d48; }
+  .mm-bubble.b-mauzoo { background: #f3e8ff; border-color: #7e22ce; box-shadow: 6px 6px 0px #7e22ce; }
+
+  .bubble-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px dashed rgba(15, 23, 42, 0.25);
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+  }
+
+  .bubble-title {
+    font-size: 1.45rem;
+    font-weight: bold;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .bubble-clue {
+    font-size: 1rem;
+    background: rgba(15, 23, 42, 0.1);
+    padding: 0 10px;
+    border-radius: 12px;
+    color: #1e293b;
+    font-weight: bold;
+  }
+
+  .bubble-input-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .bubble-input {
+    flex: 1;
+    font-family: inherit;
+    font-size: 1.2rem;
+    background: #ffffff;
+    color: #0f172a;
+    border: 2px solid #475569;
+    border-radius: 12px;
+    padding: 4px 12px;
+  }
+
+  .bubble-input:focus {
+    outline: none;
+    border-color: #0284c7;
+  }
+
+  .bubble-check-btn {
+    font-family: inherit;
+    font-size: 1.05rem;
+    background: #0f172a;
+    color: #facc15;
+    border: none;
+    padding: 4px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .bubble-feedback {
+    font-size: 1.05rem;
+    font-weight: bold;
+    margin-top: 4px;
+    min-height: 24px;
+  }
+
+  @media (max-width: 960px) {
+    .radial-layout {
+      grid-template-columns: 1fr;
+    }
+    .center-circle {
+      width: 170px;
+      height: 170px;
+    }
+  }
+
+  textarea.student-input, input.student-input {
+    width: 100%;
+    font-family: inherit;
+    font-size: 1.25rem;
+    background: #0f172a;
+    color: #fff;
+    border: 1.5px solid #475569;
+    border-radius: 14px;
+    padding: 14px;
+    margin-top: 10px;
+    line-height: 2.1;
+  }
+
+  textarea.student-input:focus, input.student-input:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+
+  .bank-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: rgba(6, 11, 25, 0.9);
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px dashed var(--cyan);
+    margin-bottom: 20px;
+  }
+
+  .word-chip {
+    font-family: inherit;
+    font-size: 1.18rem;
+    background: #1e293b;
+    color: #fff;
+    border: 1.5px solid #64748b;
+    padding: 6px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+
+  .word-chip.selected {
+    background: var(--gold);
+    color: #0f172a;
+    border-color: #fff;
+    font-weight: bold;
+  }
+
+  .word-chip.done {
+    display: none;
+  }
+
+  .columns-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .drop-col {
+    background: rgba(15, 23, 42, 0.94);
+    border: 2px solid #475569;
+    border-radius: 18px;
+    padding: 16px;
+    min-height: 230px;
+    cursor: pointer;
+  }
+
+  .drop-col:hover {
+    border-color: var(--gold);
+  }
+
+  .drop-col h4 {
+    text-align: center;
+    color: var(--gold);
+    border-bottom: 1px solid #334155;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+    font-size: 1.4rem;
+  }
+
+  .placed-tag {
+    display: inline-block;
+    background: rgba(52, 211, 153, 0.2);
+    color: #a7f3d0;
+    border: 1px solid #34d399;
+    padding: 3px 12px;
+    border-radius: 10px;
+    margin: 4px;
+    font-size: 1.15rem;
+  }
+
+  .passage-box {
+    background: rgba(6, 11, 25, 0.94);
+    padding: 20px;
+    border-radius: 18px;
+    border-right: 5px solid var(--emerald);
+    font-size: 1.35rem;
+    line-height: 2.5;
+  }
+
+  .hl-phrase {
+    background: rgba(250, 204, 21, 0.22);
+    border-bottom: 2px solid var(--gold);
+    padding: 0 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fef08a;
+  }
+
+  .group-bar {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+
+  .grp-btn {
+    font-family: inherit;
+    font-size: 1.25rem;
+    padding: 10px 24px;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .g-shaheen { background: rgba(56, 189, 248, 0.2); color: #7dd3fc; border-color: #38bdf8; }
+  .g-sherdil { background: rgba(251, 146, 60, 0.2); color: #fdba74; border-color: #fb923c; }
+  .g-uqab { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; border-color: #34d399; }
+  .g-ghazi { background: rgba(250, 204, 21, 0.2); color: #fef08a; border-color: #facc15; }
+
+  .g-shaheen.active { background: #0284c7; color: #fff; }
+  .g-sherdil.active { background: #ea580c; color: #fff; }
+  .g-uqab.active { background: #059669; color: #fff; }
+  .g-ghazi.active { background: #eab308; color: #0f172a; }
+
+  .ws-panel {
+    display: none;
+    background: rgba(6, 11, 25, 0.96);
+    border: 2px solid var(--cyan);
+    border-radius: 20px;
+    padding: 25px;
+  }
+
+  .ws-panel.active {
+    display: block;
+  }
+
+  .ws-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    background: rgba(30, 41, 59, 0.75);
+    padding: 14px;
+    border-radius: 14px;
+    margin-bottom: 18px;
+  }
+
+  .ws-q {
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed #334155;
+  }
+
+  .ws-q label {
+    display: block;
+    color: var(--gold);
+    font-size: 1.25rem;
+    margin-bottom: 6px;
+  }
+
+  .btn-dl {
+    font-family: inherit;
+    font-size: 1.25rem;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 5px 18px rgba(16, 185, 129, 0.4);
+    margin: 6px;
+  }
+
+  /* Exit Slip Styling */
+  .exit-ticket {
+    background: linear-gradient(145deg, #0b132b, #172554);
+    border: 2.5px dashed var(--gold);
+    border-radius: 24px;
+    padding: 28px;
+    position: relative;
+  }
+
+  .mood-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 12px 0 20px 0;
+  }
+
+  .mood-btn {
+    font-family: inherit;
+    font-size: 1.2rem;
+    background: rgba(15, 23, 42, 0.9);
+    color: #fff;
+    border: 2px solid #475569;
+    padding: 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: 0.25s;
+  }
+
+  .mood-btn:hover {
+    border-color: var(--gold);
+  }
+
+  .mood-btn.selected {
+    background: rgba(250, 204, 21, 0.22);
+    border-color: var(--gold);
+    color: #fef08a;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(250, 204, 21, 0.35);
+  }
+
+  .submitted-board {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  .slip-card {
+    background: rgba(15, 23, 42, 0.95);
+    border-right: 5px solid var(--emerald);
+    border-radius: 14px;
+    padding: 14px 18px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="badge">جماعت ششم • اُردو گرامر چیلنج ایرینا</div>
+    <h1>⚡ مشن مرکبات اور مرکبِ ناقص کی اقسام ⚡</h1>
+    <div class="score-strip">
+      <div class="score-box">🏆 اسکور بورڈ: <strong id="points-display">0</strong> پوائنٹس</div>
+    </div>
+  </header>
+
+  <nav class="nav-tabs">
+    <button type="button" class="tab-btn active" onclick="openTab('t-concept', this)">⚡ ۱۔ مرکبِ ناقص بمقابلہ تام</button>
+    <button type="button" class="tab-btn" onclick="openTab('t-types', this)">🛡️ ۲۔ پانچ پاور اقسام</button>
+    <button type="button" class="tab-btn" onclick="openTab('t-mindmap', this)">🧠 ۳۔ ذہنی خاکہ (Mind Map)</button>
+    <button type="button" class="tab-btn" onclick="openTab('t-practice', this)">🎯 ۴۔ میدانِ مشق</button>
+    <button type="button" class="tab-btn" onclick="openTab('t-worksheets', this)">🚀 ۵۔ ٹیم چیلنج ورک شیٹس</button>
+    <button type="button" class="tab-btn" onclick="openTab('t-exitslip', this)">🎫 ۶۔ ایگزٹ سلپ (خارجی پرچی)</button>
+  </nav>
+
+  <!-- TAB 1: CONCEPT -->
+  <section id="t-concept" class="tab-content active">
+    <div class="card">
+      <h2 class="section-title">🔍 کلمہ، مرکبِ ناقص اور مرکبِ تام کا فرق</h2>
+      <p style="margin-bottom: 16px;">دو یا دو سے زیادہ بامعنی کلموں کے مجموعے کو <strong>مرکب</strong> کہتے ہیں۔ مثلاً ”پانی“ ایک مفرد کلمہ ہے، جب اس کے ساتھ ”پینا“ ملائیں تو مرکب ”پانی پینا“ بنتا ہے۔</p>
+
+      <div class="concept-grid">
+        <div class="concept-box naqis">
+          <h3 style="color: var(--orange); font-size: 1.55rem;">۱۔ مرکبِ ناقص (ادھورا کلام)</h3>
+          <p>ایسا مرکب جو سننے یا پڑھنے والے کو <strong>پورا مطلب نہ دے</strong> اور کسی جملے کا ادھورا حصہ ہو۔</p>
+          <div style="margin-top: 10px;">
+            <span class="example-pill">میری گھڑی</span>
+            <span class="example-pill">ہماری جماعت</span>
+            <span class="example-pill">بڑا کمرہ</span>
+          </div>
+        </div>
+
+        <div class="concept-box tam">
+          <h3 style="color: var(--emerald); font-size: 1.55rem;">۲۔ مرکبِ تام (مکمل جملہ)</h3>
+          <p>ایسا مرکب کلام جس سے سننے یا پڑھنے والے کو <strong>پوری بات سمجھ آ جائے</strong>۔</p>
+          <div style="margin-top: 10px;">
+            <span class="example-pill">میری گھڑی خوبصورت ہے۔</span>
+            <span class="example-pill">بڑا کمرہ اوپر ہے۔</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="section-title">🎮 ریپڈ فائر راؤنڈ: ناقص ہے یا تام؟</h2>
+      <p style="color: var(--text-soft); margin-bottom: 14px;">ہر جملہ یا ٹکڑا پڑھ کر فوراً درست بٹن دبائیں اور پوائنٹس جیتیں:</p>
+      <div class="phrase-tester" id="phrase-tester"></div>
+    </div>
+  </section>
+
+  <!-- TAB 2: 5 TYPES OF MURAKAB NAQIS -->
+  <section id="t-types" class="tab-content">
+    <div class="card">
+      <h2 class="section-title">🛡️ مرکبِ ناقص کی پانچ اہم اقسام</h2>
+      <div class="types-grid">
+        <div class="type-card">
+          <h3>۱۔ مرکبِ اضافی</h3>
+          <p>دو اسموں کے درمیان تعلق یا ملکیت ظاہر کرنے والے مرکب کو مرکبِ اضافی کہتے ہیں۔ اس میں <strong>کا، کے، کی</strong> علامتِ اضافت آتی ہے۔</p>
+          <div class="formula-tag">مضاف الیہ + علامتِ اضافت + مضاف</div>
+          <p><strong>مثالیں:</strong> محمود کی گھڑی، اردو کی کتاب، اللہ کا بندہ، اسکول کا چوکیدار۔</p>
+        </div>
+
+        <div class="type-card">
+          <h3>۲۔ مرکبِ توصیفی</h3>
+          <p>وہ مرکب جس میں کسی اسم (موصوف) کے ساتھ اس کی اچھائی، برائی یا خاصیت (صفت) بیان کی جائے۔</p>
+          <div class="formula-tag">صفت + موصوف</div>
+          <p><strong>مثالیں:</strong> اونچا پہاڑ، سنسان گلی، ٹھنڈا پانی، سرسبز میدان، شریر بچے۔</p>
+        </div>
+
+        <div class="type-card">
+          <h3>۳۔ مرکبِ عطفی</h3>
+          <p>وہ مرکب جو دو اسموں کو آپس میں ملانے کا کام دے۔ ملانے کے لیے <strong>”و“</strong> یا <strong>”اور“</strong> استعمال ہوتا ہے۔</p>
+          <div class="formula-tag">معطوف الیہ + حرفِ عطف (و / اور) + معطوف</div>
+          <p><strong>مثالیں:</strong> دن اور رات، صبح و شام، پھل اور سبزیاں، صحت و صفائی۔</p>
+        </div>
+
+        <div class="type-card">
+          <h3>۴۔ تابع مہمل</h3>
+          <p>عام بول چال میں بولے جانے والے ایسے مرکب الفاظ جن میں پہلا لفظ <strong>بامعنی (متبوع)</strong> اور دوسرا لفظ <strong>بے معنی (مہمل)</strong> ہو۔</p>
+          <div class="formula-tag">متبوع (بامعنی) + مہمل (بے معنی)</div>
+          <p><strong>مثالیں:</strong> روٹی ووٹی، پانی وانی، چائے شائے، غلط سلط، گپ شپ۔</p>
+        </div>
+
+        <div class="type-card">
+          <h3>۵۔ تابع موضوع</h3>
+          <p>ایسے مرکب الفاظ جن کے <strong>دونوں الفاظ بامعنی ہوں</strong> اور دوسرا لفظ بیان میں زور یا وسعت پیدا کرنے کے لیے لایا جائے۔</p>
+          <div class="formula-tag">متبوع (بامعنی) + زائد بامعنی لفظ</div>
+          <p><strong>مثالیں:</strong> چلنا پھرنا، حال چال، اوڑھنا بچھونا، دیکھ بھال، میل جول۔</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 3: RADIAL HUB-AND-SPOKE MIND MAP -->
+  <section id="t-mindmap" class="tab-content">
+    <div class="radial-board">
+      <div class="radial-header">
+        <h3>🧠 بصری ذہنی خاکہ: مرکبِ ناقص اور اس کی اقسام</h3>
+        <p style="color: #cbd5e1;">درمیان میں مرکزی عنوان <strong>”مرکبِ ناقص“</strong> ہے اور اطراف میں اس کی پانچ شاخیں ہیں۔ ہر خانے میں اپنی مثال لکھیں اور <strong>”چیک کریں“</strong> دبائیں!</p>
+      </div>
+
+      <div class="radial-layout">
+        <!-- RIGHT COLUMN -->
+        <div class="radial-col">
+          <div class="mm-bubble b-izafi">
+            <div class="bubble-top">
+              <span class="bubble-title">🔗 ۱۔ مرکبِ اضافی</span>
+              <span class="bubble-clue">کا / کے / کی</span>
+            </div>
+            <p style="font-size: 1.05rem;">دو اسموں کا تعلق (مضاف الیہ + مضاف)</p>
+            <div class="bubble-input-row">
+              <input type="text" class="bubble-input" id="mm-in-izafi" placeholder="مثال لکھیں (مثلاً: علی کی کتاب)">
+              <button type="button" class="bubble-check-btn" onclick="checkBubble('izafi')">چیک کریں</button>
+            </div>
+            <div class="bubble-feedback" id="mm-fb-izafi"></div>
+          </div>
+
+          <div class="mm-bubble b-tauseefi">
+            <div class="bubble-top">
+              <span class="bubble-title">⭐ ۲۔ مرکبِ توصیفی</span>
+              <span class="bubble-clue">صفت + موصوف</span>
+            </div>
+            <p style="font-size: 1.05rem;">اسم کے ساتھ اس کی خوبی یا خامی</p>
+            <div class="bubble-input-row">
+              <input type="text" class="bubble-input" id="mm-in-tauseefi" placeholder="مثال لکھیں (مثلاً: اونچا پہاڑ)">
+              <button type="button" class="bubble-check-btn" onclick="checkBubble('tauseefi')">چیک کریں</button>
+            </div>
+            <div class="bubble-feedback" id="mm-fb-tauseefi"></div>
+          </div>
+        </div>
+
+        <!-- CENTER HUB + BOTTOM BUBBLE -->
+        <div class="center-hub-wrap">
+          <div class="center-circle">
+            <span class="big-title">مرکبِ ناقص</span>
+            <span class="sub-title">(پانچ اہم اقسام)</span>
+          </div>
+
+          <div class="mm-bubble b-mauzoo" style="width: 100%; max-width: 340px;">
+            <div class="bubble-top">
+              <span class="bubble-title">⚡ ۵۔ تابع موضوع</span>
+              <span class="bubble-clue">دونوں بامعنی</span>
+            </div>
+            <p style="font-size: 1.05rem;">متبوع کے ساتھ زائد بامعنی لفظ</p>
+            <div class="bubble-input-row">
+              <input type="text" class="bubble-input" id="mm-in-mauzoo" placeholder="مثال لکھیں (مثلاً: حال چال)">
+              <button type="button" class="bubble-check-btn" onclick="checkBubble('mauzoo')">چیک کریں</button>
+            </div>
+            <div class="bubble-feedback" id="mm-fb-mauzoo"></div>
+          </div>
+        </div>
+
+        <!-- LEFT COLUMN -->
+        <div class="radial-col">
+          <div class="mm-bubble b-atfi">
+            <div class="bubble-top">
+              <span class="bubble-title">🤝 ۳۔ مرکبِ عطفی</span>
+              <span class="bubble-clue">و / اور</span>
+            </div>
+            <p style="font-size: 1.05rem;">دو اسموں کو حرفِ عطف سے ملانا</p>
+            <div class="bubble-input-row">
+              <input type="text" class="bubble-input" id="mm-in-atfi" placeholder="مثال لکھیں (مثلاً: دن اور رات)">
+              <button type="button" class="bubble-check-btn" onclick="checkBubble('atfi')">چیک کریں</button>
+            </div>
+            <div class="bubble-feedback" id="mm-fb-atfi"></div>
+          </div>
+
+          <div class="mm-bubble b-mohmal">
+            <div class="bubble-top">
+              <span class="bubble-title">💬 ۴۔ تابع مہمل</span>
+              <span class="bubble-clue">بامعنی + بے معنی</span>
+            </div>
+            <p style="font-size: 1.05rem;">متبوع کے ساتھ بے معنی لفظ</p>
+            <div class="bubble-input-row">
+              <input type="text" class="bubble-input" id="mm-in-mohmal" placeholder="مثال لکھیں (مثلاً: روٹی ووٹی)">
+              <button type="button" class="bubble-check-btn" onclick="checkBubble('mohmal')">چیک کریں</button>
+            </div>
+            <div class="bubble-feedback" id="mm-fb-mohmal"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 26px;">
+        <button type="button" class="btn-dl" onclick="downloadMindMapPDF()">📄 ذہنی خاکہ بطور PDF ڈاؤن لوڈ کریں</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 4: BOOK PRACTICE -->
+  <section id="t-practice" class="tab-content">
+    <div class="card">
+      <h2 class="section-title">🎯 مشق ۱: درست کالم میں مرکبات پہنچائیں</h2>
+      <p style="color: var(--text-soft); margin-bottom: 12px;">پہلے اوپر دیے گئے الفاظ میں سے کسی ایک پر کلک کریں، پھر نیچے اس کے درست کالم پر کلک کریں:</p>
+      
+      <div class="bank-pool" id="bank-pool"></div>
+
+      <div class="columns-3">
+        <div class="drop-col" onclick="placeInColumn('tauseefi')">
+          <h4>مرکبِ توصیفی</h4>
+          <div id="col-tauseefi"></div>
+        </div>
+        <div class="drop-col" onclick="placeInColumn('izafi')">
+          <h4>مرکبِ اضافی</h4>
+          <div id="col-izafi"></div>
+        </div>
+        <div class="drop-col" onclick="placeInColumn('atfi')">
+          <h4>مرکبِ عطفی</h4>
+          <div id="col-atfi"></div>
+        </div>
+      </div>
+      <p id="sort-msg" style="margin-top: 12px; font-weight: bold; color: var(--emerald);"></p>
+    </div>
+
+    <div class="card">
+      <h2 class="section-title">📖 مشق ۲: خط کشیدہ مرکبات کی قسم پہچانیں</h2>
+      <p style="color: var(--text-soft); margin-bottom: 12px;">پیراگراف میں سنہری رنگ کے خط کشیدہ مرکبات پر کلک کر کے ان کی قسم دیکھیں:</p>
+      
+      <div class="passage-box">
+        حمد کے معنی <span class="hl-phrase" onclick="showPhraseType('اللہ کی تعریف', 'مرکبِ اضافی (کی کی وجہ سے تعلق)')">اللہ کی تعریف</span> کے ہیں۔ نظم کی اصطلاح میں حمد اُسے کہتے ہیں جس میں باری تعالیٰ کی صفات کے ساتھ ساتھ اس کی <span class="hl-phrase" onclick="showPhraseType('عظمت و قدرت', 'مرکبِ عطفی (و حرفِ عطف)')">عظمت و قدرت</span> کا بیان ہوتا ہے۔ اور اس کی ہر پہلو سے <span class="hl-phrase" onclick="showPhraseType('تعریف و توصیف', 'مرکبِ عطفی (و حرفِ عطف)')">تعریف و توصیف</span> کی جاتی ہے۔ حمد کا موضوع اتنا ہی وسیع اور منفرد ہے جس قدر اس کی کائنات ہے۔ نظم میں <span class="hl-phrase" onclick="showPhraseType('شاعر کا لہجہ', 'مرکبِ اضافی (کا علامتِ اضافت)')">شاعر کا لہجہ</span> انتہائی مؤدبانہ اور منکسرانہ ہونا لازم ہے۔ <span class="hl-phrase" onclick="showPhraseType('اِدھر اُدھر', 'تابع موضوع (دونوں بامعنی الفاظ)')">اِدھر اُدھر</span> کی بات کہنے کے بجائے <span class="hl-phrase" onclick="showPhraseType('اللہ کی بڑائی', 'مرکبِ اضافی (کی علامتِ اضافت)')">اللہ کی بڑائی</span> کا بیان ہوتا ہے۔ اکثر شعراء دنیا سے بیزار ہو کر اشعار میں <span class="hl-phrase" onclick="showPhraseType('تکالیف اور مشکلات', 'مرکبِ عطفی (اور حرفِ عطف)')">تکالیف اور مشکلات</span> کا <span class="hl-phrase" onclick="showPhraseType('رونا دھونا', 'تابع موضوع (دونوں بامعنی الفاظ)')">رونا دھونا</span> بھی <span class="hl-phrase" onclick="showPhraseType('دعا و نجات', 'مرکبِ عطفی (و حرفِ عطف)')">دعا و نجات</span> کے ذکر کے ساتھ بیان کرتے ہیں۔
+      </div>
+      <div id="passage-result" style="margin-top: 14px; background: rgba(56, 189, 248, 0.15); border: 1px solid var(--cyan); padding: 10px 16px; border-radius: 12px; color: var(--gold);">
+        کسی بھی خط کشیدہ مرکب پر کلک کریں تاکہ اس کی قسم یہاں ظاہر ہو...
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 5: WORKSHEETS (4 TEAMS - PDF DOWNLOAD) -->
+  <section id="t-worksheets" class="tab-content">
+    <div class="card">
+      <h2 class="section-title">🚀 ٹیم چیلنج ورک شیٹس (تحریر کریں اور PDF ڈاؤن لوڈ کریں)</h2>
+      <p style="color: var(--text-soft); margin-bottom: 16px;">اپنی ٹیم منتخب کریں، دیے گئے خانوں میں جوابات مکمل کریں اور آخر میں اپنی ورک شیٹ <strong>PDF فارمیٹ</strong> میں ڈاؤن لوڈ کریں:</p>
+
+      <div class="group-bar">
+        <button type="button" class="grp-btn g-shaheen active" onclick="switchTeam('shaheen', this)">⚡ ٹیم شاہین</button>
+        <button type="button" class="grp-btn g-sherdil" onclick="switchTeam('sherdil', this)">🛡️ ٹیم شیر دل</button>
+        <button type="button" class="grp-btn g-uqab" onclick="switchTeam('uqab', this)">🦅 ٹیم عقاب</button>
+        <button type="button" class="grp-btn g-ghazi" onclick="switchTeam('ghazi', this)">🔥 ٹیم غازی</button>
+      </div>
+
+      <!-- TEAM 1: SHAHEEN -->
+      <div id="ws-shaheen" class="ws-panel active">
+        <h3 style="color: #7dd3fc; font-size: 1.65rem; margin-bottom: 12px;">⚡ چیلنج شیٹ: ٹیم شاہین</h3>
+        <div class="ws-meta">
+          <div><label>ٹیم کے اراکین کے نام:</label><input type="text" class="student-input" id="shaheen-names" placeholder="اپنے نام لکھیں..."></div>
+          <div><label>جماعت / سیکشن:</label><input type="text" class="student-input" id="shaheen-date" placeholder="جماعت ششم..."></div>
+        </div>
+
+        <div class="ws-q">
+          <label>سوال ۱: درست لفظ چن کر خالی جگہ پُر کریں (پانی، ناقص، اضافی، عطفی):</label>
+          <textarea class="student-input" id="shaheen-q1" rows="4">۱۔ ”میری گھڑی“ اور ”بڑا کمرہ“ مرکبِ __________ کی مثالیں ہیں۔
+۲۔ ”محمود کی کتاب“ مرکبِ __________ ہے۔
+۳۔ ”دن اور رات“ مرکبِ __________ کی مثال ہے۔
+۴۔ ”__________ وانی“ تابع مہمل ہے۔</textarea>
+        </div>
+
+        <div class="ws-q">
+          <label>سوال ۲: دیے گئے الفاظ سے مرکبِ توصیفی بنائیں: (مثلاً: اونچا پہاڑ) — (میدان، عمارت، پانی، لڑکا)</label>
+          <textarea class="student-input" id="shaheen-q2" rows="3" placeholder="اپنے بنائے ہوئے مرکبات یہاں لکھیں..."></textarea>
+        </div>
+
+        <div class="ws-q">
+          <label>سوال ۳: دیے گئے تابع مہمل الفاظ مکمل کریں: (روٹی _____ ، چائے _____ ، غلط _____ ، گپ _____)</label>
+          <textarea class="student-input" id="shaheen-q3" rows="2" placeholder="جواب یہاں تحریر کریں..."></textarea>
+        </div>
+
+        <div style="text-align: center;">
+          <button type="button" class="btn-dl" onclick="downloadWSPDF('shaheen', 'ٹیم شاہین')">📄 ورک شیٹ بطور PDF ڈاؤن لوڈ کریں (ٹیم شاہین)</button>
+        </div>
+      </div>
+
+      <!-- TEAM 2: SHERDIL -->
+      <div id="ws-sherdil" class="ws-panel">
+        <h3 style="color: #fdba74; font-size: 1.65rem; margin-bottom: 12px;">🛡️ چیلنج شیٹ: ٹیم شیر دل</h3>
+        <div class="ws-meta">
+          <div><label>ٹیم کے اراکین کے نام:</label><input type="text" class="student-input" id="sherdil-names" placeholder="اپنے نام لکھیں..."></div>
+          <div><label>جماعت / سیکشن:</label><input type="text" class="student-input" id="sherdil-date" placeholder="جماعت ششم..."></div>
+        </div>
+
+        <div class="ws-q">
+          <label>سوال ۱: درج ذیل مرکبات کی قسم لکھیں: (۱۔ اسکول کا چوکیدار، ۲۔ گل و گلزار، ۳۔ چٹیل میدان، ۴۔ حال چال)</label>
+          <textarea class="student-input" id="sherdil-q1" rows="4" placeholder="ہر مرکب کے سامنے اس کی قسم لکھیں..."></textarea>
+        </div>
+
+        <div class="ws-q">
+          <label>سوال ۲: دیے گئے مرکبِ ناقص کو بامعنی جملوں (مرکبِ تام) میں تبدیل کریں: (۱۔ ہماری جماعت، ۲۔ ٹھنڈا پانی، ۳۔ صبح و شام)</label>
+          <textarea class="student-input" id="sherdil-q2" rows="3" placeholder="مکمل جملے تحریر کریں..."></textarea>
+        </div>
+
+        <div class="ws-q">
+          <label>سوال ۳: مضاف اور مضاف الیہ الگ الگ کر کے لکھیں: (۱۔ اللہ کا بندہ، ۲۔ سعد کی گھڑی، ۳۔ مینا کا گھر)</label>
+          <textarea class="student-input" id="sherdil-q3" rows="3" placeholder="مضاف الیہ اور مضاف کی نشاندہی کریں..."></textarea>
+        </div>
+
+        <div style="text-align: center;">
+          <button type="button" class="btn-dl" onclick="downloadWSPDF('sherdil', 'ٹیم شیر دل')">📄 ورک شیٹ بطور PDF ڈاؤن لوڈ کریں (ٹیم شیر دل)</button>
+        </div>
+      </div>
+
+      <!-- TEAM 3: UQAB -->
+      <div id="ws-uqab" class="ws-panel">
+        <h3 style="color: #6ee7b7; font-size: 1.65rem; margin-bottom: 12px;">🦅 چیلنج شیٹ: ٹیم عقاب</h3>
+        <div class="ws-meta">
+          <div><label>ٹیم کے اراکین کے نام:</label><input type="text" class="student-input" id="uqab-names" placeholder="اپنے نام لکھیں..."></div>
+          <div><label>جماعت / سیکشن:</label><input type="text" class="student-input" id="uqab-date" placeholder="جماعت ششم..."></div>
+        </div>
+
+        <div class="ws-q">
+          <label>سوال ۱: تابع مہمل اور تابع موضوع میں مثالوں کی مدد سے فرق واضح کریں۔</label>
+          <textarea class="student-input" id="uqab-q1" rows="4" placeholder="تعریف اور دو دو مثالیں لکھیں..."></textarea>
+        </div>
+
+        <div class="ws-q">
+          <label>سوال ۲: ”کھیل کا میدان“ کے موضوع پر ۵ جملوں کا پیراگراف لکھیں جس میں کم از کم ایک مرکبِ اضافی اور ایک مرکبِ توصیفی شامل ہو۔</label>
+          <textarea class="student-input" id="uqab-q2" rows="4" placeholder="پیراگراف یہاں تحریر کریں..."></textarea>
+        </div>
+
+        <div class="ws-q">
+          <label>سوال ۳: صفت اور موصوف الگ کریں: (۱۔ خوفناک منظر، ۲۔ بلند عمارت، ۳۔ شریر بچے)</label>
+          <textarea class="student-input" id="uqab-q3" rows="3" placeholder="صفت اور موصوف الگ الگ لکھیں..."></textarea>
+        </div>
+
+        <div style="text-align: center;">
+          <button type="button" class="btn-dl" onclick="downloadWSPDF('uqab', 'ٹیم عقاب')">📄 ورک شیٹ بطور PDF ڈاؤن لوڈ کریں (ٹیم عقاب)</button>
+        </div>
+      </div>
+
+      <!-- TEAM 4: GHAZI -->
+      <div id="ws-ghazi" class="ws-panel">
+        <h3 style="color: #fef08a; font-size: 1.65rem; margin-bottom: 12px;">🔥 چیلنج شیٹ: ٹیم غازی</h3>
+        <div class="ws-meta">
+          <div><label>ٹیم کے اراکین کے نام:</label><input type="text" class="student-input" id="ghazi-names" placeholder="اپنے نام لکھیں..."></div>
+          <div><label>جماعت / سیکشن:</label><input type="text" class="student-input" id="ghazi-date" placeholder="جماعت ششم..."></div>
+        </div>
+
+        <div class="ws-q">
+          <label>سوال ۱: تخلیقی مشن — ”بارش کا ایک یادگار دن“ کے عنوان پر ایک دلچسپ پیراگراف تحریر کریں جس میں مرکبِ ناقص کی پانچوں اقسام (اضافی، توصیفی، عطفی، تابع مہمل، تابع موضوع) استعمال کی گئی ہوں اور ہر مرکب کو قوسین ( ) میں نمایاں کریں۔</label>
+          <textarea class="student-input" id="ghazi-q1" rows="5" placeholder="اپنا تخلیقی پیراگراف یہاں لکھیں..."></textarea>
+        </div>
+
+        <div class="ws-q">
+          <label>سوال ۲: تجزیاتی سوال — اگر تحریر و تقریر میں مرکبات کا درست استعمال نہ کیا جائے تو کلام میں کیا خرابیاں پیدا ہو سکتی ہیں؟ دلیل سے وضاحت کریں۔</label>
+          <textarea class="student-input" id="ghazi-q2" rows="3" placeholder="اپنا تجزیہ تحریر کریں..."></textarea>
+        </div>
+
+        <div class="ws-q">
+          <label>سوال ۳: درج ذیل الفاظ کو اس طرح جملوں میں استعمال کریں کہ ایک جملے میں وہ مرکبِ اضافی بنیں اور دوسرے میں مرکبِ توصیفی: (لفظ: ”کتاب“ اور ”پہاڑ“)</label>
+          <textarea class="student-input" id="ghazi-q3" rows="4" placeholder="جملے یہاں تحریر کریں..."></textarea>
+        </div>
+
+        <div style="text-align: center;">
+          <button type="button" class="btn-dl" onclick="downloadWSPDF('ghazi', 'ٹیم غازی')">📄 ورک شیٹ بطور PDF ڈاؤن لوڈ کریں (ٹیم غازی)</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 6: EXIT SLIP (PDF DOWNLOAD) -->
+  <section id="t-exitslip" class="tab-content">
+    <div class="card">
+      <h2 class="section-title">🎫 ایگزٹ سلپ / خارجی پرچی (آج کے سبق کے متعلق آپ کی رائے)</h2>
+      <p style="color: var(--text-soft); margin-bottom: 18px;">کلاس سے رخصت ہونے سے پہلے آج کے سبق کے بارے میں اپنی قیمتی رائے اور تاثرات درج ذیل خارجی پرچی میں ضرور درج کریں:</p>
+
+      <div class="exit-ticket">
+        <div class="ws-meta">
+          <div>
+            <label style="color: var(--gold);">طالب علم کا نام / ٹیم:</label>
+            <input type="text" class="student-input" id="exit-name" placeholder="اپنا نام اور ٹیم لکھیں...">
+          </div>
+          <div>
+            <label style="color: var(--gold);">آج کے سبق کی سمجھ بوجھ کی سطح منتخب کریں:</label>
+            <div class="mood-grid">
+              <button type="button" class="mood-btn" onclick="selectMood(this, '🤩 بہترین! سب کچھ مکمل سمجھ آ گیا')">🤩 بہترین! مکمل سمجھ آ گیا</button>
+              <button type="button" class="mood-btn" onclick="selectMood(this, '🙂 اچھا! زیادہ تر نکات سمجھ آ گئے')">🙂 اچھا! زیادہ تر سمجھ آ گیا</button>
+              <button type="button" class="mood-btn" onclick="selectMood(this, '🤔 مزید مشق کی ضرورت ہے')">🤔 مزید مشق کی ضرورت ہے</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="ws-q">
+          <label>۱۔ آج کے سبق سے آپ نے کون سی تین (3) نئی باتیں سیکھیں؟</label>
+          <textarea class="student-input" id="exit-learned" rows="3" placeholder="۱۔ ...&#10;۲۔ ...&#10;۳۔ ..."></textarea>
+        </div>
+
+        <div class="ws-q">
+          <label>۲۔ سبق کی کون سی سرگرمی یا کھیل آپ کو سب سے زیادہ پسند آیا اور کیوں؟</label>
+          <textarea class="student-input" id="exit-favorite" rows="2" placeholder="اپنی پسندیدہ سرگرمی کے بارے میں لکھیں..."></textarea>
+        </div>
+
+        <div class="ws-q" style="border-bottom: none;">
+          <label>۳۔ سبق کے متعلق آپ کی مجموعی رائے یا کوئی سوال جو آپ پوچھنا چاہتے ہوں:</label>
+          <textarea class="student-input" id="exit-opinion" rows="3" placeholder="آج کا سبق کیسا لگا؟ اپنی رائے یہاں تحریر کریں..."></textarea>
+        </div>
+
+        <div style="text-align: center; margin-top: 12px;">
+          <button type="button" class="btn-dl" style="background: linear-gradient(135deg, #38bdf8, #2563eb);" onclick="submitExitSlip()">📌 اسکرین پر پرچی جمع کریں</button>
+          <button type="button" class="btn-dl" onclick="downloadExitSlipPDF()">📄 خارجی پرچی بطور PDF ڈاؤن لوڈ کریں</button>
+        </div>
+      </div>
+
+      <div id="submitted-slips-area" style="margin-top: 24px;">
+        <h3 style="color: var(--cyan); font-size: 1.5rem; margin-bottom: 10px;">📋 طلبہ کی جمع کردہ خارجی پرچیاں:</h3>
+        <div class="submitted-board" id="submitted-board">
+          <p id="empty-slip-msg" style="color: var(--text-soft);">ابھی تک کوئی پرچی جمع نہیں کی گئی۔ اوپر فارم پُر کر کے جمع کریں!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  var totalScore = 0;
+  var selectedMoodText = "منتخب نہیں کی گئی";
+
+  function addScore(pts) {
+    totalScore += pts;
+    document.getElementById('points-display').innerText = totalScore;
+  }
+
+  function openTab(tabId, btn) {
+    var tabs = document.querySelectorAll('.tab-content');
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].classList.remove('active');
+    }
+    var btns = document.querySelectorAll('.tab-btn');
+    for (var j = 0; j < btns.length; j++) {
+      btns[j].classList.remove('active');
+    }
+    document.getElementById(tabId).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Helper function to generate clean printable PDF via browser Save as PDF
+  function openPrintablePDFWindow(title, bodyHTML) {
+    var printWin = window.open('', '_blank', 'width=900,height=700');
+    if (!printWin) {
+      alert("براہ کرم براؤزر میں Pop-up کی اجازت دیں تاکہ PDF فائل کھل سکے!");
+      return;
+    }
+    var docContent = '<!DOCTYPE html><html lang="ur" dir="rtl"><head><meta charset="UTF-8"><title>' + title + '</title>' +
+      '<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">' +
+      '<style>' +
+      '@page { size: A4; margin: 16mm; }' +
+      'body { font-family: "Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", serif; color: #0f172a; line-height: 2.2; font-size: 15pt; background: #fff; }' +
+      '.pdf-banner { background: #fef3c7; border: 1.5px solid #f59e0b; color: #92400e; padding: 8px 16px; border-radius: 10px; text-align: center; margin-bottom: 16px; font-size: 13pt; }' +
+      '@media print { .pdf-banner { display: none; } }' +
+      '.hdr { text-align: center; border-bottom: 3px double #0f172a; padding-bottom: 10px; margin-bottom: 18px; }' +
+      '.hdr h1 { font-size: 22pt; margin: 0; color: #0f172a; }' +
+      '.hdr h2 { font-size: 17pt; margin: 4px 0 0 0; color: #0369a1; }' +
+      '.meta { display: flex; justify-content: space-between; background: #f1f5f9; border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 10px; margin-bottom: 18px; font-weight: bold; }' +
+      '.box { border: 1.5px solid #94a3b8; border-radius: 12px; padding: 14px 18px; margin-bottom: 16px; page-break-inside: avoid; }' +
+      '.qt { font-weight: bold; color: #0f172a; margin-bottom: 6px; }' +
+      '.ans { background: #f8fafc; padding: 10px 14px; border-right: 4px solid #0284c7; min-height: 45px; }' +
+      '.mm-hub { background: #facc15; border: 3px solid #0f172a; border-radius: 40px; text-align: center; padding: 10px; max-width: 320px; margin: 0 auto 20px auto; font-size: 18pt; font-weight: bold; }' +
+      '.mm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }' +
+      '.mm-card { border: 2px solid #0f172a; border-radius: 16px; padding: 12px 16px; background: #f8fafc; }' +
+      '</style></head><body>' +
+      '<div class="pdf-banner">📄 PDF محفوظ کرنے کے لیے پرنٹ ونڈو میں <strong>Save as PDF</strong> منتخب کریں (یا Ctrl + P دبائیں)</div>' +
+      bodyHTML +
+      '<script>window.onload = function() { setTimeout(function() { window.print(); }, 650); };<\/script>' +
+      '</body></html>';
+
+    printWin.document.open();
+    printWin.document.write(docContent);
+    printWin.document.close();
+  }
+
+  var rapidList = [
+    { text: "میری گھڑی", type: "naqis" },
+    { text: "میری گھڑی خوبصورت ہے۔", type: "tam" },
+    { text: "اونچا پہاڑ", type: "naqis" },
+    { text: "بڑا کمرہ اوپر ہے۔", type: "tam" },
+    { text: "صبح و شام", type: "naqis" },
+    { text: "علی نے ٹھنڈا پانی پیا۔", type: "tam" }
+  ];
+
+  var testerDiv = document.getElementById('phrase-tester');
+  for (var r = 0; r < rapidList.length; r++) {
+    (function(item) {
+      var box = document.createElement('div');
+      box.className = 'phrase-item';
+      box.innerHTML = '<div class="phrase-text">' + item.text + '</div>' +
+        '<button type="button" class="btn-mini btn-naqis">مرکبِ ناقص</button>' +
+        '<button type="button" class="btn-mini btn-tam">مرکبِ تام</button>' +
+        '<div class="rf-status" style="margin-top:8px; font-size:1.05rem;"></div>';
+
+      var btns = box.querySelectorAll('button');
+      var status = box.querySelector('.rf-status');
+
+      btns[0].onclick = function() {
+        if (box.getAttribute('data-done')) return;
+        if (item.type === 'naqis') {
+          box.setAttribute('data-done', '1');
+          status.style.color = '#34d399';
+          status.innerText = '✅ بالکل درست! یہ ادھورا کلام (مرکبِ ناقص) ہے۔';
+          addScore(10);
+        } else {
+          status.style.color = '#fb7185';
+          status.innerText = '❌ غور کریں! اس میں بات مکمل ہو رہی ہے۔';
+        }
+      };
+
+      btns[1].onclick = function() {
+        if (box.getAttribute('data-done')) return;
+        if (item.type === 'tam') {
+          box.setAttribute('data-done', '1');
+          status.style.color = '#34d399';
+          status.innerText = '✅ شاباش! یہ مکمل جملہ (مرکبِ تام) ہے۔';
+          addScore(10);
+        } else {
+          status.style.color = '#fb7185';
+          status.innerText = '❌ غور کریں! اس سے پورا مطلب سمجھ نہیں آ رہا۔';
+        }
+      };
+
+      testerDiv.appendChild(box);
+    })(rapidList[r]);
+  }
+
+  function checkBubble(type) {
+    var inp = document.getElementById('mm-in-' + type);
+    var fb = document.getElementById('mm-fb-' + type);
+    var val = inp.value.trim();
+
+    if (!val) {
+      fb.style.color = '#b91c1c';
+      fb.innerText = '⚠️ پہلے خانے میں مثال لکھیں!';
+      return;
+    }
+
+    var words = val.split(/\s+/);
+    if (words.length < 2) {
+      fb.style.color = '#b91c1c';
+      fb.innerText = '⚠️ مرکب دو یا زیادہ الفاظ سے بنتا ہے!';
+      return;
+    }
+
+    var valid = false;
+    var hintMsg = '';
+
+    if (type === 'izafi') {
+      if (val.indexOf(' کا ') !== -1 || val.indexOf(' کے ') !== -1 || val.indexOf(' کی ') !== -1) {
+        valid = true;
+      } else {
+        hintMsg = '❌ اس میں ”کا، کے یا کی“ کا استعمال کریں (مثلاً: علی کی گھڑی)۔';
+      }
+    } else if (type === 'atfi') {
+      if (val.indexOf(' و ') !== -1 || val.indexOf(' اور ') !== -1) {
+        valid = true;
+      } else {
+        hintMsg = '❌ دو اسموں کو ”و“ یا ”اور“ سے ملائیں (مثلاً: صبح و شام)۔';
+      }
+    } else {
+      valid = true;
+    }
+
+    if (valid) {
+      fb.style.color = '#15803d';
+      fb.innerText = '✅ شاباش! بہترین مثال لکھی ہے۔';
+      if (!inp.getAttribute('data-scored')) {
+        inp.setAttribute('data-scored', '1');
+        addScore(15);
+      }
+    } else {
+      fb.style.color = '#b91c1c';
+      fb.innerText = hintMsg;
+    }
+  }
+
+  function downloadMindMapPDF() {
+    var exIzafi = document.getElementById('mm-in-izafi').value || '---';
+    var exTauseefi = document.getElementById('mm-in-tauseefi').value || '---';
+    var exAtfi = document.getElementById('mm-in-atfi').value || '---';
+    var exMohmal = document.getElementById('mm-in-mohmal').value || '---';
+    var exMauzoo = document.getElementById('mm-in-mauzoo').value || '---';
+
+    var body = '<div class="hdr"><h1>اُردو قواعد • جماعت ششم</h1><h2>بصری ذہنی خاکہ (Mind Map)</h2></div>' +
+      '<div class="mm-hub">مرکبِ ناقص اور اس کی اقسام</div>' +
+      '<div class="mm-grid">' +
+      '<div class="mm-card"><div class="qt">🔗 ۱۔ مرکبِ اضافی (کا / کے / کی)</div><div class="ans">مثال: <strong>' + exIzafi + '</strong></div></div>' +
+      '<div class="mm-card"><div class="qt">⭐ ۲۔ مرکبِ توصیفی (صفت + موصوف)</div><div class="ans">مثال: <strong>' + exTauseefi + '</strong></div></div>' +
+      '<div class="mm-card"><div class="qt">🤝 ۳۔ مرکبِ عطفی (و / اور)</div><div class="ans">مثال: <strong>' + exAtfi + '</strong></div></div>' +
+      '<div class="mm-card"><div class="qt">💬 ۴۔ تابع مہمل (بامعنی + بے معنی)</div><div class="ans">مثال: <strong>' + exMohmal + '</strong></div></div>' +
+      '<div class="mm-card" style="grid-column: span 2;"><div class="qt">⚡ ۵۔ تابع موضوع (دونوں بامعنی الفاظ)</div><div class="ans">مثال: <strong>' + exMauzoo + '</strong></div></div>' +
+      '</div>';
+
+    openPrintablePDFWindow('MindMap_Murakab_Naqis', body);
+  }
+
+  var sortItems = [
+    { w: "سرسبز میدان", cat: "tauseefi" },
+    { w: "شریر بچے", cat: "tauseefi" },
+    { w: "بہار کے دن", cat: "izafi" },
+    { w: "خوبصورت عورت", cat: "tauseefi" },
+    { w: "اسکول کا چوکیدار", cat: "izafi" },
+    { w: "صحت و صفائی", cat: "atfi" },
+    { w: "چٹیل میدان", cat: "tauseefi" },
+    { w: "حسین وادی", cat: "tauseefi" },
+    { w: "بلند عمارت", cat: "tauseefi" },
+    { w: "گل و گلزار", cat: "atfi" },
+    { w: "نشیب و فراز", cat: "atfi" },
+    { w: "آب و ہوا", cat: "atfi" },
+    { w: "مینا کا گھر", cat: "izafi" },
+    { w: "خوفناک منظر", cat: "tauseefi" },
+    { w: "سعد کی گھڑی", cat: "izafi" }
+  ];
+
+  var activeChip = null;
+  var bankPool = document.getElementById('bank-pool');
+
+  for (var s = 0; s < sortItems.length; s++) {
+    (function(item) {
+      var chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'word-chip';
+      chip.innerText = item.w;
+      chip.setAttribute('data-cat', item.cat);
+      chip.onclick = function() {
+        var allChips = document.querySelectorAll('.word-chip');
+        for (var c = 0; c < allChips.length; c++) allChips[c].classList.remove('selected');
+        chip.classList.add('selected');
+        activeChip = chip;
+      };
+      bankPool.appendChild(chip);
+    })(sortItems[s]);
+  }
+
+  function placeInColumn(colCat) {
+    var msg = document.getElementById('sort-msg');
+    if (!activeChip) {
+      msg.style.color = '#facc15';
+      msg.innerText = '⚠️ پہلے اوپر والے ذخیرے میں سے کسی مرکب پر کلک کریں!';
+      return;
+    }
+    if (activeChip.getAttribute('data-cat') === colCat) {
+      var tag = document.createElement('span');
+      tag.className = 'placed-tag';
+      tag.innerText = activeChip.innerText;
+      document.getElementById('col-' + colCat).appendChild(tag);
+      activeChip.classList.add('done');
+      activeChip = null;
+      addScore(10);
+      msg.style.color = '#34d399';
+      msg.innerText = '✅ بہترین! درست کالم میں رکھا گیا۔';
+    } else {
+      msg.style.color = '#fb7185';
+      msg.innerText = '❌ یہ اس کالم کا مرکب نہیں ہے، دوبارہ کوشش کریں!';
+    }
+  }
+
+  function showPhraseType(phrase, typeDesc) {
+    document.getElementById('passage-result').innerHTML =
+      '<strong>مرکب:</strong> ”' + phrase + '“ &nbsp;|&nbsp; <strong>قسم:</strong> ' + typeDesc;
+    addScore(5);
+  }
+
+  function switchTeam(teamKey, btn) {
+    var panels = document.querySelectorAll('.ws-panel');
+    for (var i = 0; i < panels.length; i++) panels[i].classList.remove('active');
+    var btns = document.querySelectorAll('.grp-btn');
+    for (var j = 0; j < btns.length; j++) btns[j].classList.remove('active');
+    document.getElementById('ws-' + teamKey).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function downloadWSPDF(teamKey, teamTitle) {
+    var names = document.getElementById(teamKey + '-names').value || "نام درج نہیں کیا گیا";
+    var date = document.getElementById(teamKey + '-date').value || "جماعت ششم";
+    var q1 = document.getElementById(teamKey + '-q1').value.replace(/\n/g, '<br>') || '---';
+    var q2 = document.getElementById(teamKey + '-q2').value.replace(/\n/g, '<br>') || '---';
+    var q3 = document.getElementById(teamKey + '-q3').value.replace(/\n/g, '<br>') || '---';
+
+    var panel = document.getElementById('ws-' + teamKey);
+    var labels = panel.querySelectorAll('.ws-q label');
+
+    var body = '<div class="hdr"><h1>اُردو قواعد: مرکبات اور مرکبِ ناقص کی اقسام</h1><h2>چیلنج ورک شیٹ — ' + teamTitle + '</h2></div>' +
+      '<div class="meta"><span>ٹیم کے اراکین: ' + names + '</span><span>جماعت / سیکشن: ' + date + '</span></div>' +
+      '<div class="box"><div class="qt">' + labels[0].innerText + '</div><div class="ans">' + q1 + '</div></div>' +
+      '<div class="box"><div class="qt">' + labels[1].innerText + '</div><div class="ans">' + q2 + '</div></div>' +
+      '<div class="box"><div class="qt">' + labels[2].innerText + '</div><div class="ans">' + q3 + '</div></div>';
+
+    openPrintablePDFWindow('Worksheet_' + teamTitle, body);
+  }
+
+  function selectMood(btn, moodStr) {
+    var mBtns = document.querySelectorAll('.mood-btn');
+    for (var i = 0; i < mBtns.length; i++) {
+      mBtns[i].classList.remove('selected');
+    }
+    btn.classList.add('selected');
+    selectedMoodText = moodStr;
+  }
+
+  function submitExitSlip() {
+    var name = document.getElementById('exit-name').value.trim() || "طالب علم";
+    var learned = document.getElementById('exit-learned').value.trim();
+    var fav = document.getElementById('exit-favorite').value.trim();
+    var opinion = document.getElementById('exit-opinion').value.trim();
+
+    if (!learned && !opinion) {
+      alert("براہ کرم خارجی پرچی جمع کرنے سے پہلے کم از کم ایک خانہ پُر کریں!");
+      return;
+    }
+
+    var emptyMsg = document.getElementById('empty-slip-msg');
+    if (emptyMsg) emptyMsg.style.display = 'none';
+
+    var board = document.getElementById('submitted-board');
+    var card = document.createElement('div');
+    card.className = 'slip-card';
+    card.innerHTML =
+      '<div style="color: var(--gold); font-weight: bold; font-size: 1.3rem;">🎫 ' + name + '</div>' +
+      '<div style="color: var(--cyan); font-size: 1.05rem;">تاثر: ' + selectedMoodText + '</div>' +
+      '<div style="margin-top: 6px;"><strong>سیکھے گئے نکات:</strong> ' + (learned || '---') + '</div>' +
+      '<div><strong>پسندیدہ سرگرمی:</strong> ' + (fav || '---') + '</div>' +
+      '<div><strong>سبق پر رائے:</strong> ' + (opinion || '---') + '</div>';
+
+    board.appendChild(card);
+    addScore(15);
+
+    document.getElementById('exit-name').value = '';
+    document.getElementById('exit-learned').value = '';
+    document.getElementById('exit-favorite').value = '';
+    document.getElementById('exit-opinion').value = '';
+  }
+
+  function downloadExitSlipPDF() {
+    var name = document.getElementById('exit-name').value || "طالب علم";
+    var learned = document.getElementById('exit-learned').value.replace(/\n/g, '<br>') || "---";
+    var fav = document.getElementById('exit-favorite').value.replace(/\n/g, '<br>') || "---";
+    var opinion = document.getElementById('exit-opinion').value.replace(/\n/g, '<br>') || "---";
+
+    var body = '<div class="hdr"><h1>🎫 ایگزٹ سلپ / خارجی پرچی</h1><h2>سبق: مرکبات اور مرکبِ ناقص کی اقسام (جماعت ششم)</h2></div>' +
+      '<div class="meta"><span>طالب علم / ٹیم: ' + name + '</span><span>سمجھ بوجھ: ' + selectedMoodText + '</span></div>' +
+      '<div class="box"><div class="qt">۱۔ آج کے سبق سے سیکھی گئی تین نئی باتیں:</div><div class="ans">' + learned + '</div></div>' +
+      '<div class="box"><div class="qt">۲۔ سب سے پسندیدہ سرگرمی اور اس کی وجہ:</div><div class="ans">' + fav + '</div></div>' +
+      '<div class="box"><div class="qt">۳۔ سبق کے متعلق مجموعی رائے یا سوال:</div><div class="ans">' + opinion + '</div></div>';
+
+    openPrintablePDFWindow('Exit_Slip_' + name, body);
+  }
+</script>
+</body>
+</html>
